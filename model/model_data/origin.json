@@ -1,0 +1,12 @@
+{
+    "social": 1,
+    "unknown": 2,
+    "email": 3,
+    "organic_search": 4,
+    "direct_traffic": 5,
+    "paid_search": 6,
+    "other": 7,
+    "display": 8,
+    "referral": 9,
+    "other_publicities": 10
+}
