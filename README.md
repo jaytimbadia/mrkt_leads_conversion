@@ -1,8 +1,4 @@
-# mrkt_leads_conversion
-Using Machine learning to predict leads for conversion.  
-
-
-# mrkt_leads_conversion
+# Leads conversion prediction using ML
 Using Machine learning to predict leads for conversion.  
 
 This repository caters better marketing leads conversion for OSlist store using machine learning approach.
