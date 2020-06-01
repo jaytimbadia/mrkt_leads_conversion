@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: melon:version1
+        container_name: melon_server
+        volumes:
+            - ./data:/home/lead_predict/data
+            - ./model:/home/lead_predict/model
+            - ./version_shift.bat:/home/lead_predict/
+            - ./requirements.txt:/home/lead_predict/

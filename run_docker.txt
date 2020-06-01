@@ -1,0 +1,24 @@
+We are deploying our project using docker.
+
+There are two ways to deploy it.
+
+1. You can clone entire repo & run docker-compose file to build and deploy (running predictions).
+With this, you can modify the source code and check for improvemnts and bugs.
+Once done, build thedocker image using the container and update the code to Github.
+
+steps:
+1. Clone the repo using git clone cmd
+2. Go to docker terminal, (install if not) - docker-compose build app(app is our service)
+3. Once build - docker compose up app
+4. This command will run the prediction on the file you gave. Its set default to default_test.csv. Can change.
+
+
+2. If you want to deploy without cloning just to check results, then use these steps.
+
+1. Go to docker terminal and run - docker build https://github.com/jaytimbadia/dockers.git#master:.
+2. This command will create an image and build the project from master branch
+3. After this ,run - docker run --name <name_of_container(any)> aa357841f762<image_created_name>
+
+
+Docker-compose use only if you have localled your project & want to fix | improve it.
+Else use docker only.
