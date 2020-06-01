@@ -45,4 +45,4 @@ ML Devops Pipeline.
 #### Note: To run version_shift.bat, kindly configure python environment and repo path as per your system python & download configuration.
 
 ### Docker
-Kindly read dockers.txt for information.
+Kindly read run_docker.txt for information.
