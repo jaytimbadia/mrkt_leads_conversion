@@ -1,18 +1,6 @@
 import pandas as pd
 import pickle
 import json
-import argparse
-
-
-arg_parse = argparse.ArgumentParser()
-
-arg_parse.add_argument('-m', '--modelname', required=False, help='choose from lr or svm', default='svm')
-
-args = vars(arg_parse.parse_args())
-
-model_name = args['modelname']
-inputfile = 'model_data/eval.csv'
-args = None
 
 
 def evalaute(model_name, csv_file):
@@ -38,7 +26,7 @@ def evalaute(model_name, csv_file):
         else:
             raise Exception('Sorry, currently do not privide support for {} model'.format(model_name))
 
-        training_dir = 'trained_models/'
+        training_dir = 'model/trained_models/'
         with open(training_dir + filename, 'rb') as file:
             clf = pickle.load(file)
 
@@ -50,4 +38,4 @@ def evalaute(model_name, csv_file):
         raise Exception(error)
 
 # Accuracy on evaluation:  0.7108433734939759
-evalaute(model_name, inputfile)
+# evalaute(model_name, inputfile)

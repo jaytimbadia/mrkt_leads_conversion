@@ -1,24 +1,12 @@
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
-import argparse
 from sklearn import svm
 import pandas as pd
 import functools
 import time
 import pickle
 import json
-
-arg_parse = argparse.ArgumentParser()
-
-arg_parse.add_argument('-m', '--modelname', required=False, help='choose from lr or svm', default='svm')
-arg_parse.add_argument('-f', '--inputfile', required=True, help='path to data file (.csv)')
-
-args = vars(arg_parse.parse_args())
-
-model_name = args['modelname']
-inputfile = args['inputfile']
-args = None
 
 
 def timer(func):
@@ -41,7 +29,7 @@ def model_preprocessing(data):
     try:
         landing_page_json = dict()
         origin_json = dict()
-        model_data_dir = 'model_data/'
+        model_data_dir = 'model/model_data/'
         _lcounter, _ocounter = 0, 0
         for index, row in data.iterrows():
             if row['landing_page_id'] not in landing_page_json.keys():
@@ -63,8 +51,8 @@ def model_preprocessing(data):
         print('Preparing data for training & evaluation.')
 
         train, evals = train_test_split(data, test_size=0.15)
-        train.to_csv('model_data/train.csv')
-        evals.to_csv('model_data/eval.csv')
+        train.to_csv('model/model_data/train.csv')
+        evals.to_csv('model/model_data/eval.csv')
         print('Training data examples: {}'.format(len(train)))
         print('Evaluation data examples: {}'.format(len(evals)))
     except Exception as error:
@@ -72,7 +60,7 @@ def model_preprocessing(data):
 
 
 @timer
-def model_train(csv_file, model_name):
+def model_train(model_name, csv_file):
     # Trains & save the model baed on inputs passed.
     # input required: model name (lr || svm) (optional), csv_file_train_with_labels
     try:
@@ -89,12 +77,12 @@ def model_train(csv_file, model_name):
         else:
             raise Exception('Sorry, currently do not privide support for {} model'.format(model_name))
 
-        training_data = pd.read_csv('model_data/train.csv', dtype={'label': int})
+        training_data = pd.read_csv('model/model_data/train.csv', dtype={'label': int})
 
         X = training_data.iloc[:,1:3].values
         clf.fit(X=X, y=training_data.label.values)
 
-        trained_dir = 'trained_models/'
+        trained_dir = 'model/trained_models/'
 
         with open(trained_dir + filename, 'wb') as file:
             pickle.dump(clf, file)
@@ -106,6 +94,6 @@ def model_train(csv_file, model_name):
 
 # Train Coomand: python train.py -m "lr" -f "../data/test_merge.csv"
 # Note: test_merge.csv is the entire data and later splitted to train & eval
-model_train(inputfile, model_name)
+# model_train(inputfile, model_name)
 
 

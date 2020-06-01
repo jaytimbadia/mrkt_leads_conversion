@@ -8,14 +8,14 @@ def version_shift():
 
     try:
 
-        data = pd.read_csv('model_data/eval.csv', usecols=['landing_page_id', 'origin', 'label'])
+        data = pd.read_csv('model/model_data/eval.csv', usecols=['landing_page_id', 'origin', 'label'])
         true_labels = data['label'].values.tolist()
         data.astype({'landing_page_id': 'int32'}).dtypes
         data.astype({'origin': 'int32'}).dtypes
         data.astype({'label': 'int32'}).dtypes
 
-        validate_dir = 'monitor/'
-        training_dir = 'trained_models/'
+        validate_dir = 'model/monitor/'
+        training_dir = 'model/trained_models/'
 
         if os.path.exists(validate_dir + 'temp.txt'):
             os.remove(validate_dir + 'temp.txt')
